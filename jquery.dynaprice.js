@@ -9,117 +9,117 @@
  *
  */
 (function($) {
- 
-    $.fn.dynaprice = function( options ) {
- 
-        // Options par défaut
-        var settings = $.extend({
-            destination  : $('.js-dnp-destination'),
-            bind		 : 'change',
-            autoInit	 : true,
-            debug		 : false,
-            allowFloat   : true,
-            cost    	 : 3,
-            beforeUpdate : null,
-            afterUpdate  : null,
-        }, options);
 
-        var that = this;
+	$.fn.dynaprice = function( options ) {
 
-        // Méthode de debug
-        var debug = function(message) {
-        	if (settings.debug) {
-        		console.log('jQuery.Dynaprice : ' + message);
-        	}
-        };
+		// Options par défaut
+		var settings = $.extend({
+			destination : $('.js-dnp-destination'),
+			bind : 'change',
+			autoInit : true,
+			debug : false,
+			allowFloat : true,
+			cost : 3,
+			beforeUpdate : null,
+			afterUpdate : null,
+		}, options);
 
-        // La source est valide ?
-        if (false == (that instanceof jQuery)) {
-        	debug('Invalid source.');
-        	return;
-        }
+		var that = this;
 
-        // La source est un input ?
-        if (false == (that.is('input'))) {
-        	debug('Source need to be an Input.');
-        	return;
-        }
+		// Méthode de debug
+		var debug = function(message) {
+			if (settings.debug) {
+				console.log('jQuery.Dynaprice : ' + message);
+			}
+		};
 
-        // La destination est valide ?
-        if (false == (settings.destination instanceof jQuery)) {
-        	debug('Destination need to be a jQuery object.');
-        	return;
-        }
+		// La source est valide ?
+		if (false == (that instanceof jQuery)) {
+			debug('Invalid source.');
+			return;
+		}
 
-        // Il y'a un attribut "data-cost" ?
-        if (that.data('cost')) {
-        	settings.cost = parseInt(that.data('cost'));
-        }
+		// La source est un input ?
+		if (false == (that.is('input'))) {
+			debug('Source need to be an Input.');
+			return;
+		}
 
-        /*
-         * Calcule le montant
-         */
-        var calcCost = function(amount) {
-        	return parseCost(amount) * parseCost(settings.cost);
-        };
+		// La destination est valide ?
+		if (false == (settings.destination instanceof jQuery)) {
+			debug('Destination need to be a jQuery object.');
+			return;
+		}
 
-        /*
-         * Retourne la quantité
-         */
-        var getQuantity = function() {
-        	return that.val();
-        };
+		// Il y'a un attribut "data-cost" ?
+		if (that.data('cost')) {
+			settings.cost = parseInt(that.data('cost'));
+		}
 
-        /*
-         * Retourne le montant calculé actuel
-         */
-        var getDestinationAmount = function() {
-        	return parseCost(settings.destination.text());
-        }
+		/*
+		 * Calcule le montant
+		 */
+		var calcCost = function(amount) {
+			return parseCost(amount) * parseCost(settings.cost);
+		};
 
-        /*
-         * Parse le coût
-         */
-        var parseCost = function(cost) {
-        	if (settings.allowFloat) {
-        		return parseFloat(cost);
-        	} else {
-        		return parseInt(cost);
-        	}
-        }
+		/*
+		 * Retourne la quantité
+		 */
+		var getQuantity = function() {
+			return that.val();
+		};
 
-        /*
-         * Applique l'opération de calcul
-         */
-        var apply = function() {
+		/*
+		 * Retourne le montant calculé actuel
+		 */
+		var getDestinationAmount = function() {
+			return parseCost(settings.destination.text());
+		}
+
+		/*
+		 * Parse le coût
+		 */
+		var parseCost = function(cost) {
+			if (settings.allowFloat) {
+				return parseFloat(cost);
+			} else {
+				return parseInt(cost);
+			}
+		}
+
+		/*
+		 * Applique l'opération de calcul
+		 */
+		var apply = function() {
 			if (settings.beforeUpdate instanceof Function) {
-        		settings.beforeUpdate($(that), settings.destination, getDestinationAmount());
-        	}
+				settings.beforeUpdate($(that), settings.destination, getDestinationAmount());
+			}
 
-        	settings.destination.text(calcCost(getQuantity()));
+			settings.destination.text(calcCost(getQuantity()));
 
-        	if (settings.afterUpdate instanceof Function) {
-        		settings.afterUpdate($(that), settings.destination, getDestinationAmount());
-        	}
-        }
+			if (settings.afterUpdate instanceof Function) {
+				settings.afterUpdate($(that), settings.destination, getDestinationAmount());
+			}
+		}
 
-        // Capture l'event
-        this.on(settings.bind, function(e) {
-        	e.preventDefault();
+		// Capture l'event
+		this.on(settings.bind, function(e) {
+			e.preventDefault();
 
-        	apply();
+			apply();
 
-        	return false;
-        });
+			return false;
+		});
 
-        // Doit-on initialiser ?
-        if (settings.autoInit) {
-        	apply();
-        }
- 
-        // Retourne la fonction
-        return that;
+		// Doit-on initialiser ?
+		if (settings.autoInit) {
+			apply();
+		}
 
-    };
- 
+		// Retourne la fonction
+		return that;
+
+	};
+
 }(jQuery));
