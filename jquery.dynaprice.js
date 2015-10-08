@@ -1,11 +1,10 @@
 /*
  *
- * jQuery Dynaprice
- *
- * Author  : Marceau Casals <marceau@casals.fr>
- * Doc     : https://github.com/AkibaTech/jQuery.Dynaprice
- * Website : https://marceau.casals.fr
- * Version : 0.1
+ * @package jQuery Dynaprice
+ * @author 	Marceau Casals <marceau@casals.fr>
+ * @doc 	https://github.com/AkibaTech/jQuery.Dynaprice
+ * @url 	https://marceau.casals.fr
+ * @version 0.0.1
  *
  */
 (function($) {
