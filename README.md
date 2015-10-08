@@ -45,9 +45,9 @@ L'évenement qui détecte le changement dans l'input.
 Activer ou non le debugage du plugin (dans la console).
 > Par défaut : false
 
-### allowFloat (bool)
-Autorise ou non les nombres décimaux.
-> Par défaut : true
+### round (bool)
+Arrondi ou non le résultat.
+> Par défaut : false
 
 ### beforeUpdate (function)
 Fonction à appeler avant la mise à jour. Signature : $source, $destination, oldCost

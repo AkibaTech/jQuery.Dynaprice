@@ -4,7 +4,7 @@
  * @author 	Marceau Casals <marceau@casals.fr>
  * @doc 	https://github.com/AkibaTech/jQuery.Dynaprice
  * @url 	https://marceau.casals.fr
- * @version 0.0.1
+ * @version 0.1.0
  *
  */
 (function($) {
@@ -17,7 +17,7 @@
 			bind : 'change',
 			autoInit : true,
 			debug : false,
-			allowFloat : true,
+			round : false,
 			cost : 3,
 			beforeUpdate : null,
 			afterUpdate : null,
@@ -52,14 +52,14 @@
 
 		// Il y'a un attribut "data-cost" ?
 		if (that.data('cost')) {
-			settings.cost = parseInt(that.data('cost'));
+			settings.cost = parseCost(that.data('cost'));
 		}
 
 		/*
 		 * Calcule le montant
 		 */
 		var calcCost = function(amount) {
-			return parseCost(amount) * parseCost(settings.cost);
+			return round(amount * settings.cost);
 		};
 
 		/*
@@ -73,18 +73,18 @@
 		 * Retourne le montant calculé actuel
 		 */
 		var getDestinationAmount = function() {
-			return parseCost(settings.destination.text());
+			return parseInt(settings.destination.text(), 10);
 		}
 
 		/*
-		 * Parse le coût
+		 * Arrondi le résultat
 		 */
-		var parseCost = function(cost) {
-			if (settings.allowFloat) {
-				return parseFloat(cost);
-			} else {
-				return parseInt(cost);
+		var round = function(value) {
+			if (settings.round) {
+				return Math.round(value);
 			}
+
+			return value;
 		}
 
 		/*
