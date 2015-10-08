@@ -1,6 +1,6 @@
 {
   "name": "jquery.dynaprice",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Plugin pour calculer dynamiquement un prix selon un input.",
   "main": "jquery.dynaprice.js",
   "scripts": {
