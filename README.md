@@ -2,6 +2,8 @@
 
 jQuery Dynaprice est un petit plugin jQuery qui permet de calculer automatiquement un coût depuis un \<input\>.
 
+![alt tag](https://raw.githubusercontent.com/AkibaTech/jQuery.Dynaprice/master/example/screenshot.png)
+
 ## Cas d'utilisation
 
 J'ai un champ "quantité" auquel je veux associé un calcul dynamique d'un prix en fonction de cette dernière.
@@ -48,6 +50,8 @@ Activer ou non le debugage du plugin (dans la console).
 ### round (bool)
 Arrondi ou non le résultat.
 > Par défaut : false
+
+## Callbacks
 
 ### beforeUpdate (function)
 Fonction à appeler avant la mise à jour. Signature : $source, $destination, oldCost
